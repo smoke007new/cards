@@ -28,12 +28,13 @@ kon = []
 viner = []
 for i in range(n):
 	koll = 6
-	viner1 = []
+	viner1 = 0
 	x1 = []
 	for i in range(koll):
 		x1.append(str(deck.pop(randint(0,(len(deck)-1)))))
-		viner1.append(cards['x1'])
-			
+		y = x1
+#		viner1.append(cards[y])
+		viner1 = viner1 + int(cards[y])			
 	kon.append(x1)
 	viner.append(viner1)
 	#i=+1
