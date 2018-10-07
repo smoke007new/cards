@@ -1,63 +1,52 @@
 from random import randint
 
-#cards = {'heart_6' : 1, 'heart_7' : 2, 'heart_8' : 3, 'heart_9' : 4, 'heart_10' : 5,
-#'heart_jack' : 6, 'heart_queen' : 7, 'heart_king' : 8, 'heart_ace' :9,
-#'diamond_6' : 1, 'diamond_7' : 2, 'diamond_8' : 3, 'diamond_9' : 4, 'diamond_10' : 5,
-#'diamond_jack' : 6, 'diamond_queen' : 7, 'diamond_king' : 8, 'diamond_ace' :9,
-#'club_6' : 1, 'club_7' : 2, 'club_8' : 3, 'club_9' : 4, 'club_10' : 5,
-#'club_jack' : 6, 'club_queen' : 7, 'club_king' : 8, 'club_ace' :9,
-#'spade_6' : 1, 'spade_7' : 2, 'spade_8' : 3, 'spade_9' : 4, 'spade_10' : 5,
-#'spade_jack' : 6, 'spade_queen' : 7, 'spade_king' : 8, 'spade_ace' :9}
-
-mast = ['heart', 'diamond', 'club', 'spade']
+suit = ['heart', 'diamond', 'club', 'spade']
 
 card = ['_6', '_7', '_8', '_9', '_10', '_jack', '_queen', '_king', '_ace']
 
-koz = mast[randint(0,(len(mast)-1))]
-print(koz)
-cards = {}
+trump = suit[randint(0,(len(suit)-1))] # определение козыря random suit
 
-for i in mast:
-	znach = 0
+cards = {}
+# генерация карт с весом
+for i in suit:
+	weight = 0
 	for j in card:
 		
 		ind = str(i + j)
-		if i == koz:
-			znach = znach + 1
-			cards[ind] = znach +9
+		if i == trump:
+			weight = weight + 1
+			cards[ind] = weight +9
 		else:
-			znach = znach + 1
-			cards[ind] = znach
-
+			weight = weight + 1
+			cards[ind] = weight
+# перемешивание колоды
 deck = []
 for key in cards.keys():
 	deck.append(key)
-
+# проверка на количество игроков
 n = 0
 while (n < 2 or n > 6):
-	n = int(input('insert n: '))
-kon = []
-viner = []
+	n = int(input('enter the number of players: '))
+game = []	#сдача карт
+vinner = []	#вес карт
 for i in range(n):
-	koll = 6
-	viner1 = 0
+	quantity = 6
+	vinner1 = 0
 	x1 = []
-	for i in range(koll):
+	for i in range(quantity):
 		x1.append(str(deck.pop(randint(0,(len(deck)-1)))))
 		
-#		viner1.append(cards[y])
-		if x1[i] == koz:
-			viner1 = viner1 + cards[x1[i]] + 9	
+		if x1[i] == trump:
+			vinner1 = vinner1 + cards[x1[i]] + 9	#проверка на козырь
 		else:
-			viner1 = viner1 + cards[x1[i]]
-	kon.append(x1)
-	viner.append(viner1)
+			vinner1 = vinner1 + cards[x1[i]]
+	game.append(x1)
+	vinner.append(vinner1)
 
-print(viner)
+print('trump:', trump)
+#печать карт на руках
 for i in range(n):
-	print("user %s =" %str(i+1) , kon[i])
-
-print(max(viner))
-print(viner.index(max(viner)))
-viner_index = viner.index(max(viner))
-print('viner %s and card ' %str(viner_index + 1), kon[viner_index])
+	print("player %s =" %str(i+1) , game[i])
+#определение победителя 
+vinner_index = vinner.index(max(vinner))
+print('vinner player %s and card: ' %str(vinner_index + 1), game[vinner_index])
