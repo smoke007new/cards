@@ -4,10 +4,10 @@ suit = ['heart', 'diamond', 'club', 'spade']
 
 card = ['_6', '_7', '_8', '_9', '_10', '_jack', '_queen', '_king', '_ace']
 
-trump = suit[randint(0,(len(suit)-1))] # определение козыря random suit
+trump = suit[randint(0,(len(suit)-1))] #random suit
 
 cards = {}
-# генерация карт с весом
+#weight card generation
 for i in suit:
 	weight = 0
 	for j in card:
@@ -19,16 +19,16 @@ for i in suit:
 		else:
 			weight = weight + 1
 			cards[ind] = weight
-# перемешивание колоды
+#deck mixing
 deck = []
 for key in cards.keys():
 	deck.append(key)
-# проверка на количество игроков
+#check on the number of players
 n = 0
 while (n < 2 or n > 6):
 	n = int(input('enter the number of players: '))
-game = []	#сдача карт
-vinner = []	#вес карт
+game = []	#handing over cards
+vinner = []	#card weight
 for i in range(n):
 	quantity = 6
 	vinner1 = 0
@@ -37,16 +37,16 @@ for i in range(n):
 		x1.append(str(deck.pop(randint(0,(len(deck)-1)))))
 		
 		if x1[i] == trump:
-			vinner1 = vinner1 + cards[x1[i]] + 9	#проверка на козырь
+			vinner1 = vinner1 + cards[x1[i]] + 9	#trump test
 		else:
 			vinner1 = vinner1 + cards[x1[i]]
 	game.append(x1)
 	vinner.append(vinner1)
 
 print('trump:', trump)
-#печать карт на руках
+#hand printing
 for i in range(n):
 	print("player %s =" %str(i+1) , game[i])
-#определение победителя 
+#determination of the winner
 vinner_index = vinner.index(max(vinner))
-print('vinner player %s and card: ' %str(vinner_index + 1), game[vinner_index])
+print('better cards player %s, card: ' %str(vinner_index + 1), game[vinner_index])
